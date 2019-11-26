@@ -15,6 +15,23 @@ struct Basic_Particles {
 	std::array<std::vector<realT>, dimension> velocity_space;
 	std::vector<realT> mass;
 	std::vector<realT> radii;
+
+	std::array<realT, dimension> get_RelativeVectorInCoordinateSpace(const std::size_t& idx_i, const std::size_t& idx_j) {
+		std::array<realT, dimension> result;
+		result = {coordinate_space[0][idx_j] - coordinate_space[0][idx_i],
+				  coordinate_space[1][idx_j] - coordinate_space[1][idx_i],
+				  coordinate_space[2][idx_j] - coordinate_space[2][idx_i]};
+		return result;
+	}
+
+	realT get_VelocitySqr(const std::size_t& idx) {
+		realT result = 0.0;
+		for (std::size_t idim = 0; idim < dimension; ++idim) {
+			result += (velocity_space[idim][idx] * velocity_space[idim][idx]);
+		}
+		return result;
+	}
+
 };
 
 }

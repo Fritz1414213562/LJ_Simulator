@@ -3,6 +3,7 @@
 #include"MiscException.hpp"
 #include<string>
 #include<vector>
+#include<array>
 #include<fstream>
 
 namespace lj_simulator {
@@ -39,6 +40,17 @@ std::vecotr<std::string> read_ParameterLine(const std::string& input_string, con
 	else if ((input_string[0] == '#') || result.size() == 2) {}
 	else throw Misc_Exception("invalid format in parameter file.");
 
+	return result;
+}
+
+
+template<typename realT, std::size_t dimension>
+realT calc_Vec2ScholarSqr(const std::array<realT, dimension>& Vec) {
+	realT result = 0;
+
+	for (std::size_t idx = 0; idx < dimension; ++idx) {
+		result += (Vec[idx] * Vec[idx]);
+	}
 	return result;
 }
 

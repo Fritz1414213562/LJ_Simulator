@@ -1,8 +1,9 @@
 #ifndef NEIGHBOR_LIST_HPP
 #define NEIGHBOR_LIST_HPP
-#include"abstract/Initialized.hpp"
 #include"../util/AllUtility.hpp"
 #include"Particle.hpp"
+#include"Box.hpp"
+#include<cmath>
 #include<vector>
 #include<array>
 #include<fstream>
@@ -12,29 +13,29 @@ namespace lj_simulator {
 
 namespace core {
 
-namespace neighbor_list : public Init_By {
+namespace neighbor_list {
 
 template<typename realT, std::size_t dimension>
 class Neighbor_list {
 
 public:
 	
-	Neighbor_list(const std::ifstream& parameter_file);
+//	Neighbor_list(const std::ifstream& parameter_file);
+	Neighbor_list(const realT& cutoff_len, const realT& margin_rate);
 	~Neighbor_list() = default;
 
-	void make_NeighborPair(const Particles& particle_set);
+	void make_NeighborPair(const Particles<realT, dimension>& particle_set, const Box<realT, dimension>& box_environments);
+
+	bool check_NeighborList(const Particles<realT, dimension>& particle_set, const realT& delta_t);
 
 
 private:
 
 	std::array<std::vector<int>, 2> pair_list;
 	realT cutoff_length;
-	realT MARGIN_RATIO;
-	// for reading paramter file.
-	const std::string row_name_cutoff_length = "cutoff_length";
-	const std::string row_name_margin_ratio = "margin_ratio";
-
-	void be_InitializedBy(const std::ifstream& ifs);
+	realT margin_ratio;
+	realT max_margin_length;
+	realT margin_length;
 
 };
 }
