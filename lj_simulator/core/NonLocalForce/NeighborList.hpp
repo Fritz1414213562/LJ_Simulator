@@ -28,7 +28,11 @@ public:
 
 	bool check_NeighborList(const Particles<realT, dimension>& particle_set, const realT& delta_t);
 
-	std::array<int, 2> operator()(const std::size_t& idx) {
+	const std::array<int, 2>& operator()(const std::size_t& idx) {
+		return {pair_list[0][idx], pair_list[1][idx]};
+	}
+
+	const std::array<int, 2>& operator[](const std::size_t& idx) {
 		return {pair_list[0][idx], pair_list[1][idx]};
 	}
 

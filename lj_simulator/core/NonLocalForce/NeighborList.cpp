@@ -22,7 +22,7 @@ void lj_simulator::core::neighbor_list::NeighborList::make_NeighborPair(const Pa
 			box_environments.adjust_PeriodicLength(relative_vector);
 
 			realT sqr_scholar_of_rel_vec = lj_simulator::utility::functions::calc_Vec2ScholarSqr(relative_vector);
-			if (sqr_scholar_of_rel_vec > cutoff_length) continue;
+			if (sqr_scholar_of_rel_vec > cutoff_length * cutoff_length) continue;
 
 			pair_list[0].push_back(idx_i);
 			pair_list[1].push_back(idx_j);

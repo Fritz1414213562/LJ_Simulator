@@ -15,6 +15,7 @@ struct Basic_Particles {
 	std::array<std::vector<realT>, dimension> velocity_space;
 	std::vector<realT> mass;
 	std::vector<realT> radii;
+	std::size_t system_size;
 
 	std::array<realT, dimension> get_RelativeVectorInCoordinateSpace(const std::size_t& idx_i, const std::size_t& idx_j) {
 		std::array<realT, dimension> result;
@@ -30,6 +31,10 @@ struct Basic_Particles {
 			result += (velocity_space[idim][idx] * velocity_space[idim][idx]);
 		}
 		return result;
+	}
+
+	std::size_t size() {
+		return system_size;
 	}
 
 };
